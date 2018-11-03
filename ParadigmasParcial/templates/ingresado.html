@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido{% endblock %}
+
+{% block page_content %}
+<div class="page-header">    
+    <h1>Ingresó correctamente!</h1>
+	{% if ultimasVentas %}
+		<div>
+		<h2>Ultimas Ventas registradas</h2>
+			<table class="table table-sm table-dark">
+				<thead>
+					<tr>
+						<th class="text-center" >Código</th>
+						<th align="center" >Producto</th>
+						<th class="text-center" >Cliente</th>
+						<th class="text-center" >Cantidad</th>
+						<th class="text-center" >Precio Unitario</th>
+						<th class="text-center" >Monto de Compra</th>
+					</tr>
+				</thead>
+				{% for fila in ultimasVentas %}
+				<tbody>
+					<TR class="thead-dark">
+						<TD align="center">{{fila.codigo}}</TD>
+						<TD >{{fila.producto}}</TD>
+						<TD >{{fila.cliente}}</TD>
+						<TD align="center">{{fila.cantidad}}</TD>
+						<TD align="center">$ {{'%0.2f'|format(fila.precioUnitario|float)}}</TD>
+						<TD align="center">$ {{ '%0.2f'|format(fila.precioUnitario|float * fila.cantidad|int) }}</TD>
+					</TR>
+				</tbody>
+				{% endfor %}
+			</table>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}
